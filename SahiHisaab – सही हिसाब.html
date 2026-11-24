@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>SahiHisaab – सही हिसाब</title>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+        <title>SahiHisaab – सही हिसाब</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Baloo+Paaji+2:wght@500;700;800&display=swap">
+        <style>
+            :root {
+                --f: "Baloo 2", "Baloo Paaji 2", "Noto Sans Devanagari", "Noto Sans Gurmukhi", system-ui, sans-serif;
+                --pg: #f7fbff;
+                --ln: #cfe0f3;
+                --tx: #1b2a36;
+                --mut: #5f7384;
+                --teal: #0b4f4a;
+                --gold: #ffb703;
+                --pen: #2457c5;
+                --ok: #1f9d55;
+                --wa: #f4a300;
+                --wt: #9a6700;
+                --no: #d62828;
+                --mg: rgba(214, 40, 40, .45);
+                box-sizing: border-box;
+                padding-top: env(safe-area-inset-top, 0px);
+                padding-bottom: env(safe-area-inset-bottom, 0px)
+            }
+
+            @media(prefers-color-scheme:dark) {
+                :root:not([data-theme=light]) {
+                    --pg: #10181d;
+                    --ln: #223540;
+                    --tx: #e8f0f4;
+                    --mut: #9fb3c0;
+                    --pen: #8fb0ff;
+                    --wt: #ffd166
+                }
+            }
+
+            :root[data-theme=dark] {
+                --pg: #10181d;
+                --ln: #223540;
+                --tx: #e8f0f4;
+                --mut: #9fb3c0;
+                --pen: #8fb0ff;
+                --wt: #ffd166
+            }
+
+            html {
+                scroll-padding-top: env(safe-area-inset-top, 0px)
+            }
+
+            * {
+                box-sizing: border-box;
+                -webkit-tap-highlight-color: transparent
+            }
+
+            body {
+                margin: 0;
+                font: 500 19px/1.3 var(--f);
+                color: var(--tx);
+                min-height: 100vh;
+                background: var(--pg) repeating-linear-gradient(to bottom, transparent 0 35px, var(--ln) 35px 36px)
+            }
+
+            body:before {
+                content: "";
+                position: fixed;
+                inset: 0 0 auto;
+                height: env(safe-area-inset-top, 0px);
+                background: var(--teal);
+                z-index: 10
+            }
+
+            :focus-visible {
+                outline: 3px solid var(--pen);
+                outline-offset: 2px
+            }
+
+            .top {
+                background: var(--teal);
+                position: sticky;
+                top: env(safe-area-inset-top, 0px);
+                z-index: 9;
+                padding: 8px 14px
+            }
+
+            .top:after {
+                content: "";
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 100%;
+                height: 9px;
+                background: radial-gradient(circle at 9px 0, var(--gold) 6px, transparent 7px) 0 0/18px 9px repeat-x
+            }
+
+            .tb {
+                max-width: 520px;
+                margin: auto;
+                display: flex;
+                align-items: center;
+                gap: 8px
+            }
+
+            .tb i {
+                flex: 1
+            }
+
+            .logo {
+                color: #fff;
+                font-weight: 800;
+                font-size: 22px;
+                cursor: pointer;
+                white-space: nowrap
+            }
+
+            input,
+            select {
+                font: 600 19px var(--f);
+                min-height: 56px;
+                border-radius: 14px;
+                border: 3px solid var(--pen);
+                background: var(--pg);
+                color: var(--tx);
+                padding: 0 12px;
+                width: 100%
+            }
+
+            .lsel {
+                width: auto;
+                min-width: 128px;
+                min-height: 48px;
+                border-radius: 24px;
+                border: 0;
+                background: #fff;
+                color: var(--teal);
+                font-size: 16px;
+                font-weight: 800;
+                padding: 0 10px
+            }
+
+            .ex {
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                border: 2px solid rgba(255, 255, 255, .5);
+                background: none;
+                color: #fff;
+                font-size: 22px;
+                cursor: pointer
+            }
+
+            .hero {
+                background: var(--teal);
+                color: #fff;
+                text-align: center;
+                padding: 10px 16px 34px
+            }
+
+            .hero h1 {
+                margin: 6px 0 0;
+                font-size: 42px;
+                font-weight: 800;
+                letter-spacing: .5px
+            }
+
+            .hero p {
+                margin: 0;
+                color: #ffe08a;
+                font-size: 18px
+            }
+
+            .bk {
+                position: relative;
+                height: 112px;
+                max-width: 240px;
+                margin: auto
+            }
+
+            .bo {
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                font-size: 76px;
+                line-height: 1;
+                animation: thump 2.6s .3s both
+            }
+
+            .cn {
+                position: absolute;
+                top: -6px;
+                font-size: 32px;
+                opacity: 0;
+                animation: drop 1.1s both
+            }
+
+            .c1 {
+                left: calc(50% - 52px);
+                animation-delay: .2s
+            }
+
+            .c2 {
+                left: calc(50% - 16px);
+                animation-delay: .65s
+            }
+
+            .c3 {
+                left: calc(50% + 20px);
+                animation-delay: 1.1s
+            }
+
+            @keyframes drop {
+                0% {
+                    transform: translateY(-20px);
+                    opacity: 0
+                }
+
+                20% {
+                    opacity: 1
+                }
+
+                75% {
+                    transform: translateY(58px);
+                    opacity: 1
+                }
+
+                100% {
+                    transform: translateY(66px) scale(.4);
+                    opacity: 0
+                }
+            }
+
+            @keyframes thump {
+
+                25%,
+                55% {
+                    transform: scale(1.08)
+                }
+
+                40%,
+                100% {
+                    transform: scale(1)
+                }
+            }
+
+            main {
+                max-width: 520px;
+                margin: 0 auto;
+                padding: 18px 16px 140px 26px;
+                position: relative
+            }
+
+            main:before {
+                content: "";
+                position: absolute;
+                left: 12px;
+                top: 0;
+                bottom: 0;
+                width: 2px;
+                background: var(--mg)
+            }
+
+            .btn {
+                min-height: 58px;
+                border: 0;
+                border-radius: 30px;
+                font: 800 20px var(--f);
+                padding: 0 22px;
+                cursor: pointer;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                background: var(--gold);
+                color: #2a1d00;
+                transition: transform .12s
+            }
+
+            .btn:active {
+                transform: scale(.96)
+            }
+
+            .btn.t {
+                background: var(--teal);
+                color: #fff
+            }
+
+            .btn.w {
+                width: 100%
+            }
+
+            .back {
+                background: none;
+                border: 0;
+                color: var(--pen);
+                font: 800 19px var(--f);
+                min-height: 48px;
+                cursor: pointer;
+                padding: 0
+            }
+
+            label {
+                display: block;
+                font-weight: 800;
+                margin: 10px 0 4px
+            }
+
+            .phw {
+                display: flex;
+                gap: 8px
+            }
+
+            .cc {
+                background: var(--teal);
+                color: #fff;
+                border-radius: 14px;
+                padding: 0 14px;
+                display: grid;
+                place-items: center;
+                font-weight: 800
+            }
+
+            .fl {
+                display: flex;
+                gap: 12px;
+                padding: 10px 0;
+                border-bottom: 2px dashed var(--ln);
+                font-weight: 700
+            }
+
+            .fl span {
+                font-size: 26px
+            }
+
+            .l {
+                color: var(--mut);
+                font-size: 15px
+            }
+
+            .c {
+                text-align: center
+            }
+
+            .who {
+                color: var(--mut);
+                font-weight: 700
+            }
+
+            .dbl {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                border-top: 4px double var(--tx);
+                border-bottom: 4px double var(--tx);
+                margin: 8px 0 6px;
+                background: var(--pg)
+            }
+
+            .dbl>div {
+                padding: 10px 6px;
+                text-align: center
+            }
+
+            .dbl>div+div {
+                border-left: 2px solid var(--mg)
+            }
+
+            .dbl small {
+                display: block;
+                font-weight: 700;
+                color: var(--mut);
+                font-size: 15px
+            }
+
+            .amt {
+                display: block;
+                font-size: 30px;
+                font-weight: 800
+            }
+
+            .ok {
+                color: var(--ok)
+            }
+
+            .no {
+                color: var(--no)
+            }
+
+            .wa {
+                color: var(--wt)
+            }
+
+            .pg {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                width: 100%;
+                background: none;
+                border: 0;
+                border-bottom: 2px dashed var(--ln);
+                padding: 12px 0;
+                text-align: left;
+                color: inherit;
+                font: inherit;
+                cursor: pointer;
+                min-height: 78px
+            }
+
+            .pg:active {
+                background: rgba(36, 87, 197, .08)
+            }
+
+            .mid {
+                flex: 1;
+                min-width: 0
+            }
+
+            .mid b {
+                display: block;
+                font-size: 20px;
+                overflow: hidden;
+                text-overflow: ellipsis
+            }
+
+            .mid small {
+                color: var(--mut);
+                font-size: 15px
+            }
+
+            .rt {
+                text-align: right
+            }
+
+            .rt b {
+                display: block;
+                font-size: 22px;
+                color: var(--pen)
+            }
+
+            .av {
+                display: inline-grid;
+                place-items: center;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                color: #fff;
+                font-weight: 800;
+                font-size: 24px;
+                flex: none
+            }
+
+            .st {
+                font-style: normal;
+                font-size: 14px;
+                font-weight: 800
+            }
+
+            .st:before {
+                content: "";
+                display: inline-block;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: currentColor;
+                margin-right: 5px
+            }
+
+            .empty {
+                text-align: center;
+                font-size: 22px;
+                padding: 30px 0;
+                font-weight: 700
+            }
+
+            .nav {
+                position: fixed;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: var(--teal);
+                padding-bottom: env(safe-area-inset-bottom, 0px);
+                z-index: 8
+            }
+
+            .nav div {
+                display: flex;
+                max-width: 520px;
+                margin: auto
+            }
+
+            .nav button {
+                flex: 1;
+                min-height: 68px;
+                background: none;
+                border: 0;
+                color: #bfe0db;
+                font: 700 15px var(--f);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                position: relative
+            }
+
+            .nav button span {
+                font-size: 26px;
+                line-height: 1.1
+            }
+
+            .nav .on {
+                color: #fff
+            }
+
+            .nav .on:before {
+                content: "";
+                position: absolute;
+                top: 0;
+                width: 46px;
+                height: 5px;
+                border-radius: 0 0 5px 5px;
+                background: var(--gold)
+            }
+
+            .fab {
+                position: fixed;
+                right: max(16px, calc(50% - 244px));
+                bottom: calc(84px + env(safe-area-inset-bottom, 0px));
+                z-index: 8;
+                box-shadow: 0 6px 18px rgba(0, 0, 0, .3)
+            }
+
+            .sum {
+                padding: 14px 0 6px;
+                position: relative
+            }
+
+            .sum small {
+                color: var(--mut);
+                font-weight: 700
+            }
+
+            .huge {
+                display: block;
+                font-size: 58px;
+                line-height: 1.05;
+                font-weight: 800;
+                color: var(--pen)
+            }
+
+            .stamp {
+                display: inline-block;
+                margin: 8px 0 6px;
+                border: 4px solid currentColor;
+                border-radius: 10px;
+                padding: 0 14px;
+                font-weight: 800;
+                font-size: 22px;
+                transform: rotate(-7deg);
+                animation: stamp .5s .35s both
+            }
+
+            @keyframes stamp {
+                0% {
+                    transform: rotate(-7deg) scale(2.4);
+                    opacity: 0
+                }
+
+                60% {
+                    transform: rotate(-7deg) scale(.9);
+                    opacity: 1
+                }
+
+                100% {
+                    transform: rotate(-7deg) scale(1);
+                    opacity: 1
+                }
+            }
+
+            .bar {
+                height: 14px;
+                border-radius: 7px;
+                background: var(--ln);
+                overflow: hidden
+            }
+
+            .bar i {
+                display: block;
+                height: 100%;
+                background: var(--ok);
+                border-radius: 7px;
+                animation: grow 1.2s .2s both
+            }
+
+            @keyframes grow {
+                from {
+                    width: 0
+                }
+            }
+
+            .ln {
+                display: flex;
+                align-items: baseline;
+                gap: 6px;
+                padding: 7px 0;
+                font-weight: 700
+            }
+
+            .ld {
+                flex: 1;
+                border-bottom: 3px dotted var(--mut);
+                transform: translateY(-4px)
+            }
+
+            h3 {
+                margin: 18px 0 4px
+            }
+
+            .it {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 10px 0;
+                border-bottom: 2px dashed var(--ln)
+            }
+
+            .tk {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: grid;
+                place-items: center;
+                color: #fff;
+                font-weight: 800;
+                flex: none
+            }
+
+            .tk.ok {
+                background: var(--ok);
+                color: #fff
+            }
+
+            .tk.no {
+                background: var(--no);
+                color: #fff
+            }
+
+            .tk.wa {
+                background: var(--wa);
+                color: #2a1d00
+            }
+
+            .rb {
+                min-height: 52px;
+                min-width: 52px;
+                border: 0;
+                border-radius: 26px;
+                font-size: 24px;
+                cursor: pointer;
+                margin-left: 4px
+            }
+
+            .ob {
+                width: 62px;
+                height: 72px;
+                text-align: center;
+                font-size: 34px;
+                font-weight: 800;
+                padding: 0
+            }
+
+            .obs {
+                display: flex;
+                gap: 10px;
+                justify-content: center;
+                margin: 10px 0
+            }
+
+            .dotp {
+                background: var(--gold);
+                color: #2a1d00;
+                border-radius: 14px;
+                padding: 10px;
+                text-align: center;
+                font-weight: 800;
+                margin: 10px 0
+            }
+
+            .qa {
+                display: flex;
+                gap: 8px;
+                margin-top: 8px
+            }
+
+            .qa button {
+                flex: 1;
+                min-height: 48px;
+                border-radius: 24px;
+                border: 2px solid var(--pen);
+                background: none;
+                color: var(--pen);
+                font: 800 17px var(--f);
+                cursor: pointer
+            }
+
+            .sheet {
+                position: fixed;
+                inset: 0;
+                background: rgba(5, 30, 28, .55);
+                display: flex;
+                align-items: flex-end;
+                z-index: 20
+            }
+
+            .sheet>div {
+                background: var(--pg);
+                width: 100%;
+                max-width: 520px;
+                margin: auto;
+                border-radius: 28px 28px 0 0;
+                padding: 20px 18px calc(20px + env(safe-area-inset-bottom, 0px));
+                animation: su .28s
+            }
+
+            @keyframes su {
+                from {
+                    transform: translateY(100%)
+                }
+            }
+
+            .toast {
+                position: fixed;
+                left: 12px;
+                right: 12px;
+                bottom: calc(92px + env(safe-area-inset-bottom, 0px));
+                max-width: 496px;
+                margin: auto;
+                background: var(--teal);
+                color: #fff;
+                border-radius: 18px;
+                padding: 14px;
+                z-index: 30;
+                animation: su .25s
+            }
+
+            .shk {
+                animation: shk .4s
+            }
+
+            @keyframes shk {
+                25% {
+                    transform: translateX(-10px)
+                }
+
+                75% {
+                    transform: translateX(10px)
+                }
+            }
+
+            @keyframes inR {
+                from {
+                    opacity: 0;
+                    transform: translateX(40px)
+                }
+            }
+
+            @keyframes inL {
+                from {
+                    opacity: 0;
+                    transform: translateX(-40px)
+                }
+            }
+
+            @keyframes inT {
+                from {
+                    opacity: 0;
+                    transform: translateY(12px)
+                }
+            }
+
+            @keyframes rise {
+                from {
+                    opacity: 0;
+                    transform: translateY(22px)
+                }
+            }
+
+            @keyframes fi {
+                from {
+                    opacity: 0
+                }
+            }
+
+            @keyframes pop {
+                0% {
+                    transform: scale(.6)
+                }
+
+                60% {
+                    transform: scale(1.25)
+                }
+
+                100% {
+                    transform: scale(1)
+                }
+            }
+
+            @keyframes ring {
+                0% {
+                    box-shadow: 0 0 0 0 rgba(214, 40, 40, .45)
+                }
+
+                100% {
+                    box-shadow: 0 0 0 14px transparent
+                }
+            }
+
+            @keyframes sweep {
+                to {
+                    left: 130%
+                }
+            }
+
+            @keyframes bob {
+                50% {
+                    transform: translateY(-8px)
+                }
+            }
+
+            @keyframes rp {
+                to {
+                    transform: scale(14);
+                    opacity: 0
+                }
+            }
+
+            @keyframes dr {
+                to {
+                    stroke-dashoffset: 0
+                }
+            }
+
+            #app.inR {
+                animation: inR .38s cubic-bezier(.2, .8, .2, 1) both
+            }
+
+            #app.inL {
+                animation: inL .38s cubic-bezier(.2, .8, .2, 1) both
+            }
+
+            #app.inT {
+                animation: inT .3s ease both
+            }
+
+            #app.inR .pg,
+            #app.inL .pg,
+            #app.inT .pg {
+                animation: rise .45s calc(var(--i, 0)*70ms) both
+            }
+
+            .btn:not(.fab),
+            .pg,
+            .rb {
+                position: relative
+            }
+
+            .btn,
+            .pg,
+            .nav button,
+            .rb {
+                overflow: hidden
+            }
+
+            .rp {
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                margin: -10px 0 0 -10px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, .55);
+                transform: scale(0);
+                animation: rp .6s ease-out forwards;
+                pointer-events: none
+            }
+
+            .pg .rp {
+                background: rgba(36, 87, 197, .22)
+            }
+
+            .shine:after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: -60%;
+                width: 40%;
+                height: 100%;
+                background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .7), transparent);
+                transform: skewX(-20deg);
+                animation: sweep 3.2s 1s infinite
+            }
+
+            .alert {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin: 10px 0;
+                padding: 10px 14px;
+                border-radius: 14px;
+                font-weight: 800;
+                color: #fff;
+                background: var(--no);
+                animation: ring 1.8s infinite
+            }
+
+            .alert.wa {
+                background: var(--wa);
+                color: #2a1d00;
+                animation: none
+            }
+
+            .nav .on span {
+                animation: pop .4s
+            }
+
+            .empty {
+                animation: bob 2.4s ease-in-out infinite
+            }
+
+            .sheet {
+                animation: fi .25s
+            }
+
+            .ob {
+                animation: rise .4s both
+            }
+
+            .ob:nth-child(2) {
+                animation-delay: .07s
+            }
+
+            .ob:nth-child(3) {
+                animation-delay: .14s
+            }
+
+            .ob:nth-child(4) {
+                animation-delay: .21s
+            }
+
+            input:focus {
+                box-shadow: 0 0 0 5px rgba(36, 87, 197, .22)
+            }
+
+            .tick {
+                position: fixed;
+                inset: 0;
+                display: grid;
+                place-items: center;
+                z-index: 50;
+                pointer-events: none;
+                animation: fi .2s both
+            }
+
+            .tick svg {
+                width: 140px;
+                height: 140px;
+                filter: drop-shadow(0 8px 20px rgba(0, 0, 0, .35));
+                animation: pop .5s both
+            }
+
+            .tick circle {
+                fill: var(--ok)
+            }
+
+            .tick path {
+                fill: none;
+                stroke: #fff;
+                stroke-width: 9;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-dasharray: 70;
+                stroke-dashoffset: 70;
+                animation: dr .5s .25s forwards
+            }
+
+            @media(prefers-reduced-motion:reduce) {
+                * {
+                    animation: none !important;
+                    transition: none !important
+                }
+            }
+        </style>
+    </head>
+
+<body>
+    <div id="top"></div>
+    <div id="hero"></div>
+    <main id="app"></main>
+    <div id="nav"></div>
+    <div id="ov"></div>
+    <script>
+        /* ADD A LANGUAGE: copy one block below, translate the values, add its name to LN and its locale to LOC. */
+        const T = {
+            en: { tag: "No mistakes, no hassle, full trust", lender: "I give Udhaar", lenderS: "Lender – track money lent", borrower: "I took Udhaar", borrowerS: "Borrower – see what I owe", welcome: "Honest accounts for everyone", lent: "Total lent", got: "Total received", left: "Still to receive", toPay: "Total left to pay", orig: "Original Udhaar", int: "Interest added", repaid: "Total repaid", inst: "Payments so far", listen: "Listen", yes: "Yes, paid", wrong: "Wrong!", addPay: "Add payment", addLoan: "New Udhaar", name: "Name", village: "Village", amt: "Amount (₹)", rate: "Interest % per month", save: "Save", cancel: "Cancel", cleared: "All paid", due: "Due soon", over: "Overdue", share: "Send on WhatsApp", back: "Back", none: "No payments yet", ok: "Confirmed", flag: "Flagged for check", cash: "Cash", upi: "UPI", mode: "How paid", ppart: "Interest part", prt: "Loan part", saved: "Payment saved", say: "You still have to pay {n} rupees. Last payment was {a} rupees on {d}.", say0: "You have paid everything. Thank you.", who: "Who are you?", view: "Open view", phone: "Mobile number", pin: "4-digit PIN", login: "Login", signup: "Create account", logout: "Logout", hi: "Namaste", newHere: "New here? Create account", haveAcc: "Have an account? Login", bad: "Wrong number or PIN", taken: "This number is already used", bph: "Borrower’s mobile number", demo: "Demo: 9876543210 · PIN 1234 (lender) | 9123456780 · PIN 1234 (borrower)", nolo: "No udhaar yet", f1: "Clear hisaab", f2: "Listen in your language", f3: "Safe records", role: "I am a…", getOtp: "Get OTP", otp: "Enter OTP", verify: "Verify & enter", chg: "Change number", gave: "Udhaar given", took: "Udhaar taken", sent: "OTP sent to", dotp: "Demo OTP", wotp: "Wrong OTP", badp: "Enter a 10-digit mobile number", tryn: "Try: 9876543210 (gives & takes) · 9123456780 (takes)" },
+            hi: { tag: "न गलती, न झंझट, पूरा विश्वास", lender: "मैं उधार देता हूँ", lenderS: "उधार देने वाला – दिया हुआ पैसा देखें", borrower: "मैंने उधार लिया है", borrowerS: "उधार लेने वाला – मेरा बकाया देखें", welcome: "सबके लिए सही हिसाब", lent: "कुल दिया", got: "कुल वापस मिला", left: "अभी लेना बाकी", toPay: "बची हुई रकम", orig: "असली उधार", int: "जुड़ा ब्याज", repaid: "अब तक चुकाया", inst: "अब तक की किस्तें", listen: "सुनाओ", yes: "हाँ, दिया", wrong: "गलत है!", addPay: "पैसा जोड़ें", addLoan: "नया उधार", name: "नाम", village: "गाँव", amt: "रकम (₹)", rate: "ब्याज % हर महीने", save: "सेव करें", cancel: "रद्द करें", cleared: "सब चुका दिया", due: "जल्दी देना है", over: "देर हो गई", share: "व्हाट्सऐप पर भेजें", back: "वापस", none: "अभी कोई पैसा नहीं", ok: "पक्का हुआ", flag: "जाँच के लिए भेजा", cash: "नकद", upi: "यूपीआई", mode: "कैसे दिया", ppart: "ब्याज का हिस्सा", prt: "उधार का हिस्सा", saved: "पैसा सेव हो गया", say: "आपको अभी {n} रुपये देने बाकी हैं। आखिरी बार {d} को {a} रुपये दिए थे।", say0: "आपने सब चुका दिया है। धन्यवाद।", who: "आप कौन हैं?", view: "देखें", phone: "मोबाइल नंबर", pin: "4 अंकों का पिन", login: "लॉगिन", signup: "खाता बनाएँ", logout: "बाहर निकलें", hi: "नमस्ते", newHere: "नए हैं? खाता बनाएँ", haveAcc: "खाता है? लॉगिन करें", bad: "नंबर या पिन गलत है", taken: "यह नंबर पहले से है", bph: "उधार लेने वाले का नंबर", demo: "डेमो: 9876543210 · पिन 1234 (देने वाला) | 9123456780 · पिन 1234 (लेने वाला)", nolo: "अभी कोई उधार नहीं", f1: "साफ़ हिसाब", f2: "अपनी भाषा में सुनें", f3: "सुरक्षित रिकॉर्ड", role: "मैं हूँ…", getOtp: "ओटीपी भेजें", otp: "ओटीपी डालें", verify: "पक्का करें और अंदर जाएँ", chg: "नंबर बदलें", gave: "दिया हुआ उधार", took: "लिया हुआ उधार", sent: "ओटीपी भेजा गया:", dotp: "डेमो ओटीपी", wotp: "ओटीपी गलत है", badp: "10 अंकों का मोबाइल नंबर डालें", tryn: "आज़माएँ: 9876543210 (देता भी, लेता भी) · 9123456780 (लेता है)" },
+            pa: { tag: "ਨਾ ਗਲਤੀ, ਨਾ ਝੰਜਟ, ਪੂਰਾ ਵਿਸ਼ਵਾਸ", lender: "ਮੈਂ ਉਧਾਰ ਦਿੰਦਾ ਹਾਂ", lenderS: "ਉਧਾਰ ਦੇਣ ਵਾਲਾ – ਦਿੱਤਾ ਪੈਸਾ ਵੇਖੋ", borrower: "ਮੈਂ ਉਧਾਰ ਲਿਆ ਹੈ", borrowerS: "ਉਧਾਰ ਲੈਣ ਵਾਲਾ – ਮੇਰਾ ਬਕਾਇਆ ਵੇਖੋ", welcome: "ਸਭ ਲਈ ਸਹੀ ਹਿਸਾਬ", lent: "ਕੁੱਲ ਦਿੱਤਾ", got: "ਕੁੱਲ ਵਾਪਸ ਮਿਲਿਆ", left: "ਹਾਲੇ ਲੈਣਾ ਬਾਕੀ", toPay: "ਬਾਕੀ ਰਕਮ", orig: "ਅਸਲ ਉਧਾਰ", int: "ਜੁੜਿਆ ਵਿਆਜ", repaid: "ਹੁਣ ਤੱਕ ਮੋੜਿਆ", inst: "ਹੁਣ ਤੱਕ ਦੀਆਂ ਕਿਸ਼ਤਾਂ", listen: "ਸੁਣਾਓ", yes: "ਹਾਂ, ਦਿੱਤਾ", wrong: "ਗਲਤ ਹੈ!", addPay: "ਪੈਸਾ ਜੋੜੋ", addLoan: "ਨਵਾਂ ਉਧਾਰ", name: "ਨਾਮ", village: "ਪਿੰਡ", amt: "ਰਕਮ (₹)", rate: "ਵਿਆਜ % ਹਰ ਮਹੀਨੇ", save: "ਸੇਵ ਕਰੋ", cancel: "ਰੱਦ ਕਰੋ", cleared: "ਸਭ ਮੋੜ ਦਿੱਤਾ", due: "ਜਲਦੀ ਦੇਣਾ ਹੈ", over: "ਦੇਰ ਹੋ ਗਈ", share: "ਵਟਸਐਪ ਤੇ ਭੇਜੋ", back: "ਵਾਪਸ", none: "ਹਾਲੇ ਕੋਈ ਪੈਸਾ ਨਹੀਂ", ok: "ਪੱਕਾ ਹੋਇਆ", flag: "ਜਾਂਚ ਲਈ ਭੇਜਿਆ", cash: "ਨਕਦ", upi: "ਯੂਪੀਆਈ", mode: "ਕਿਵੇਂ ਦਿੱਤਾ", ppart: "ਵਿਆਜ ਦਾ ਹਿੱਸਾ", prt: "ਉਧਾਰ ਦਾ ਹਿੱਸਾ", saved: "ਪੈਸਾ ਸੇਵ ਹੋ ਗਿਆ", say: "ਤੁਹਾਨੂੰ ਹਾਲੇ {n} ਰੁਪਏ ਦੇਣੇ ਬਾਕੀ ਹਨ। ਆਖਰੀ ਵਾਰ {d} ਨੂੰ {a} ਰੁਪਏ ਦਿੱਤੇ ਸਨ।", say0: "ਤੁਸੀਂ ਸਭ ਮੋੜ ਦਿੱਤਾ ਹੈ। ਧੰਨਵਾਦ।", who: "ਤੁਸੀਂ ਕੌਣ ਹੋ?", view: "ਵੇਖੋ", phone: "ਮੋਬਾਈਲ ਨੰਬਰ", pin: "4 ਅੰਕਾਂ ਦਾ ਪਿੰਨ", login: "ਲਾਗਇਨ", signup: "ਖਾਤਾ ਬਣਾਓ", logout: "ਬਾਹਰ ਨਿਕਲੋ", hi: "ਸਤ ਸ੍ਰੀ ਅਕਾਲ", newHere: "ਨਵੇਂ ਹੋ? ਖਾਤਾ ਬਣਾਓ", haveAcc: "ਖਾਤਾ ਹੈ? ਲਾਗਇਨ ਕਰੋ", bad: "ਨੰਬਰ ਜਾਂ ਪਿੰਨ ਗਲਤ ਹੈ", taken: "ਇਹ ਨੰਬਰ ਪਹਿਲਾਂ ਤੋਂ ਹੈ", bph: "ਉਧਾਰ ਲੈਣ ਵਾਲੇ ਦਾ ਨੰਬਰ", demo: "ਡੈਮੋ: 9876543210 · ਪਿੰਨ 1234 (ਦੇਣ ਵਾਲਾ) | 9123456780 · ਪਿੰਨ 1234 (ਲੈਣ ਵਾਲਾ)", nolo: "ਹਾਲੇ ਕੋਈ ਉਧਾਰ ਨਹੀਂ", f1: "ਸਾਫ਼ ਹਿਸਾਬ", f2: "ਆਪਣੀ ਭਾਸ਼ਾ ਵਿੱਚ ਸੁਣੋ", f3: "ਸੁਰੱਖਿਅਤ ਰਿਕਾਰਡ", role: "ਮੈਂ ਹਾਂ…", getOtp: "ਓਟੀਪੀ ਭੇਜੋ", otp: "ਓਟੀਪੀ ਪਾਓ", verify: "ਪੱਕਾ ਕਰੋ ਤੇ ਅੰਦਰ ਜਾਓ", chg: "ਨੰਬਰ ਬਦਲੋ", gave: "ਦਿੱਤਾ ਉਧਾਰ", took: "ਲਿਆ ਉਧਾਰ", sent: "ਓਟੀਪੀ ਭੇਜਿਆ:", dotp: "ਡੈਮੋ ਓਟੀਪੀ", wotp: "ਓਟੀਪੀ ਗਲਤ ਹੈ", badp: "10 ਅੰਕਾਂ ਦਾ ਮੋਬਾਈਲ ਨੰਬਰ ਪਾਓ", tryn: "ਅਜ਼ਮਾਓ: 9876543210 (ਦਿੰਦਾ ਵੀ, ਲੈਂਦਾ ਵੀ) · 9123456780 (ਲੈਂਦਾ ਹੈ)" }
+        };
+        const LN = { en: "English", hi: "हिन्दी", pa: "ਪੰਜਾਬੀ" }, LOC = { en: "en-IN", hi: "hi-IN", pa: "pa-IN" };
+        let lang = "en"; try { lang = localStorage.getItem("sh_lang") || "en" } catch (e) { }
+        let L = [
+            { lp: "9876543210", bp: "9123456780", lname: "Harpreet Store", n: "Ramesh Kumar", v: "Gharuan", p: 5000, r: 2, m: 3, st: "amb", pay: [{ a: 1000, d: "2026-10-05", mo: "cash", ok: 1 }, { a: 500, d: "2026-11-02", mo: "upi", ok: 0 }] },
+            { lp: "9876543210", bp: "9000000001", lname: "Harpreet Store", n: "Sunita Devi", v: "Kharar", p: 12000, r: 1, m: 6, st: "red", pay: [{ a: 2000, d: "2026-08-10", mo: "cash", ok: 1 }] },
+            { lp: "9876543210", bp: "9000000002", lname: "Harpreet Store", n: "Gurpreet Singh", v: "Mohali", p: 3000, r: 2, m: 2, st: "amb", pay: [{ a: 3120, d: "2026-11-10", mo: "cash", ok: 1 }] },
+            { lp: "9000000001", bp: "9876543210", lname: "Sunita Devi", n: "Harpreet Store", v: "Ludhiana", p: 2000, r: 1, m: 2, st: "amb", pay: [{ a: 500, d: "2026-11-01", mo: "cash", ok: 0 }] }];
+        try { const d = JSON.parse(localStorage.getItem("sh_db2")); if (d && d.L) L = d.L } catch (e) { }
+        const sv = () => { try { localStorage.setItem("sh_db2", JSON.stringify({ L })) } catch (e) { } };
+        let me = null, scr = "auth", tab = "gave", cur = 0, otp = "", ph = "", kv = "";
+        try { const m = localStorage.getItem("sh_me"); if (m) { me = { ph: m }; scr = "home" } } catch (e) { }
+        const t = k => T[lang][k] || T.en[k];
+        const R = n => "₹" + Math.round(n).toLocaleString("en-IN");
+        const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+        const D = d => new Date(d).toLocaleDateString(LOC[lang], { day: "numeric", month: "short" });
+        const calc = l => { const i = l.p * l.r / 100 * l.m, pd = l.pay.reduce((s, x) => s + x.a, 0), left = Math.max(0, l.p + i - pd); return { i, pd, left, s: left <= 0 ? "green" : l.st } };
+        const $ = id => document.getElementById(id);
+        const fm = p => p.slice(0, 5) + " " + p.slice(5), who = l => l.lname || fm(l.lp);
+        const V = k => L.map((l, i) => i).filter(i => k === "gave" ? L[i].lp === me.ph : L[i].bp === me.ph);
+        const ST = { red: ["over", "no"], amb: ["due", "wa"], green: ["cleared", "ok"] };
+        const avc = n => `<span class="av" style="background:${["#0b4f4a", "#2457c5", "#9b2d6f", "#4a5d6b", "#5b3fa0"][(n.charCodeAt(0) || 0) % 5]}">${esc(n[0] || "?")}</span>`;
+        const ln = (e, a, b) => `<div class="ln"><span>${e} ${a}</span><i class="ld"></i><b>${b}</b></div>`;
+        function go(s, i) { an = s === "view" ? "R" : "L"; scr = s; if (i != null) cur = i; render(); scrollTo({ top: 0, behavior: "smooth" }) }
+        function setLang(x) { if ($("fp")) kv = $("fp").value; lang = x; try { localStorage.setItem("sh_lang", x) } catch (e) { } document.documentElement.lang = x; an = "T"; render() }
+        function toast(m) { const d = document.createElement("div"); d.className = "toast"; d.innerHTML = m; document.body.appendChild(d); setTimeout(() => d.remove(), 4500) }
+        function conf() { for (let i = 0; i < 26; i++) { const s = document.createElement("span"); s.textContent = ["🪙", "✨", "🌾", "💚"][i % 4]; s.style.cssText = `position:fixed;top:-30px;left:${Math.random() * 100}vw;font-size:${18 + Math.random() * 16}px;z-index:40;pointer-events:none;transition:transform ${1.5 + Math.random()}s ease-in,opacity 2.2s`; document.body.appendChild(s); requestAnimationFrame(() => { s.style.transform = `translateY(${innerHeight + 60}px) rotate(${Math.random() * 360}deg)`; s.style.opacity = 0 }); setTimeout(() => s.remove(), 3500) } }
+        function cu() { document.querySelectorAll("[data-v]").forEach(e => { const v = +e.dataset.v; let s = null; const f = x => { s = s || x; const p = Math.min(1, (x - s) / 800); e.textContent = R(v * p); if (p < 1) requestAnimationFrame(f) }; requestAnimationFrame(f) }) }
+        function bad(k) { const c = $("box"); if (c) { c.classList.remove("shk"); void c.offsetWidth; c.classList.add("shk") } toast("⚠️ " + t(k)) }
+        function sendOtp() { const p = $("fp").value.trim(); if (!/^\d{10}$/.test(p)) return bad("badp"); ph = p; otp = String(1000 + Math.floor(Math.random() * 9000)); scr = "otp"; an = "R"; render() }
+        function ob(e) { e.value = e.value.replace(/\D/g, "").slice(-1); const n = e.nextElementSibling; if (e.value && n) n.focus(); else if (e.value) verify() }
+        function bk(e, v) { if (v.key === "Backspace" && !e.value && e.previousElementSibling) e.previousElementSibling.focus() }
+        function verify() {
+            const bs = [...document.querySelectorAll(".ob")]; if (bs.map(x => x.value).join("") !== otp) { bs.forEach(x => x.value = ""); bs[0].focus(); return bad("wotp") }
+            me = { ph }; try { localStorage.setItem("sh_me", ph) } catch (e) { } otp = ""; kv = ""; tab = V("gave").length || !V("took").length ? "gave" : "took"; go("home"); conf()
+        }
+        function logout() { me = null; try { localStorage.removeItem("sh_me") } catch (e) { } go("auth") }
+        function listen() {
+            const l = L[cur], c = calc(l), last = l.pay[l.pay.length - 1];
+            let s = c.left <= 0 ? t("say0") : t("say").replace("{n}", Math.round(c.left)).replace("{a}", last ? last.a : 0).replace("{d}", last ? D(last.d) : "");
+            if (!("speechSynthesis" in window)) return toast(s);
+            speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(s); u.lang = LOC[lang]; u.rate = .85; speechSynthesis.speak(u)
+        }
+        let an = "";
+        function tick() { const d = document.createElement("div"); d.className = "tick"; d.innerHTML = '<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46"/><path d="M28 52l16 16 30-34"/></svg>'; document.body.appendChild(d); setTimeout(() => d.remove(), 1300); if (navigator.vibrate) navigator.vibrate([20, 40, 20]) }
+        document.addEventListener("pointerdown", e => { const b = e.target.closest && e.target.closest(".btn,.pg,.nav button,.rb"); if (!b) return; if (navigator.vibrate) navigator.vibrate(10); const r = b.getBoundingClientRect(), s = document.createElement("span"); s.className = "rp"; s.style.left = e.clientX - r.left + "px"; s.style.top = e.clientY - r.top + "px"; b.appendChild(s); setTimeout(() => s.remove(), 650) });
+        let tx = null; document.addEventListener("touchstart", e => { tx = scr === "home" && !document.querySelector(".sheet") ? e.touches[0].clientX : null }, { passive: true });
+        document.addEventListener("touchend", e => { if (tx == null) return; const dx = e.changedTouches[0].clientX - tx; tx = null; if (Math.abs(dx) > 80) { const n = dx < 0 ? "took" : "gave"; if (n !== tab) { tab = n; an = "T"; render() } } }, { passive: true });
+        function sheet(h) { $("ov").innerHTML = `<div class="sheet" onclick="if(event.target===this)closeS()"><div>${h}</div></div>` }
+        function closeS() { $("ov").innerHTML = "" }
+        function payForm(i) { cur = i; sheet(`<h2 style="margin:0">💰 ${t("addPay")} – ${esc(L[i].n)}</h2><label>${t("amt")}</label><input id="fa" type="number" inputmode="numeric" min="1"><div class="qa">${[500, 1000, 2000].map(a => `<button onclick="$('fa').value=${a}">${R(a)}</button>`).join("")}</div><label>${t("mode")}</label><select id="fm"><option value="cash">💵 ${t("cash")}</option><option value="upi">📱 ${t("upi")}</option></select><div style="display:flex;gap:8px;margin-top:16px"><button class="btn" style="flex:1" onclick="savePay()">✅ ${t("save")}</button><button class="btn t" onclick="closeS()">${t("cancel")}</button></div>`) }
+        function savePay() {
+            const a = +$("fa").value; if (!(a > 0)) return $("fa").focus(); const l = L[cur], c = calc(l), ip = Math.min(a, Math.max(0, c.i - c.pd)), pp = a - ip;
+            l.pay.push({ a, d: new Date().toISOString().slice(0, 10), mo: $("fm").value, ok: 0 }); sv(); closeS(); render(); tick(); conf();
+            const msg = encodeURIComponent(`सही हिसाब: ${l.n} – ${R(a)} ✅ (${R(calc(l).left)})`);
+            toast(`✅ ${t("saved")}: ${R(a)}<br>${t("ppart")}: ${R(ip)} · ${t("prt")}: ${R(pp)}<br><a style="color:#ffe08a;font-weight:800" target="_blank" href="https://wa.me/?text=${msg}">📤 ${t("share")}</a>`)
+        }
+        function loanForm() { sheet(`<h2 style="margin:0">🤝 ${t("addLoan")}</h2><label>${t("name")}</label><input id="ln"><label>📱 ${t("bph")}</label><input id="lb" type="tel" inputmode="numeric" maxlength="10"><label>${t("village")}</label><input id="lv"><label>${t("amt")}</label><input id="lp" type="number" inputmode="numeric"><label>${t("rate")}</label><input id="lr" type="number" step="0.5" value="2"><div style="display:flex;gap:8px;margin-top:16px"><button class="btn" style="flex:1" onclick="saveLoan()">✅ ${t("save")}</button><button class="btn t" onclick="closeS()">${t("cancel")}</button></div>`) }
+        function saveLoan() { const n = $("ln").value.trim(), p = +$("lp").value, bp = $("lb").value.trim(); if (!n || !(p > 0) || !/^\d{10}$/.test(bp)) return; L.push({ lp: me.ph, bp, n, v: $("lv").value.trim(), p, r: +$("lr").value || 0, m: 0, st: "amb", pay: [] }); sv(); closeS(); render() }
+        function ack(i, ok) { L[cur].pay[i].ok = ok ? 1 : -1; sv(); render(); if (ok) { tick(); conf() } toast(ok ? "✅ " + t("ok") : "⚠️ " + t("flag")) }
+        const al = ls => { const o = ls.filter(i => calc(L[i]).s === "red").length, d = ls.filter(i => calc(L[i]).s === "amb").length; return o ? `<div class="alert">⚠️ ${t("over")}: ${o}</div>` : d ? `<div class="alert wa">⏰ ${t("due")}: ${d}</div>` : "" };
+        function row(i, k, x) {
+            const l = L[i], c = calc(l), s = ST[c.s], nm = k === "gave" ? l.n : who(l);
+            return `<button class="pg" style="--i:${x || 0}" onclick="go('view',${i})">${avc(nm)}<span class="mid"><b>${esc(nm)}</b><small>${k === "gave" ? "📍 " + esc(l.v) : "📞 " + fm(l.lp)}</small></span><span class="rt"><b>${R(c.left)}</b><i class="st ${s[1]}">${t(s[0])}</i></span></button>`
+        }
+        function detail() {
+            const l = L[cur], c = calc(l), s = ST[c.s], lv = l.lp === me.ph, nm = lv ? l.n : who(l), pc = Math.min(100, c.pd / (l.p + c.i || 1) * 100);
+            return `<button class="back" onclick="go('home')">← ${t("back")}</button>
+ <div class="pg" style="cursor:default;border:0;min-height:0">${avc(nm)}<span class="mid"><b style="font-size:23px">${esc(nm)}</b><small>${lv ? "📍 " + esc(l.v) : "📞 +91 " + fm(l.lp)}</small></span></div>
+ <div class="sum"><small>${t("toPay")}</small><b class="huge" data-v="${c.left}">${R(c.left)}</b><span class="stamp ${s[1]}">${c.s === "green" ? "✔" : c.s === "amb" ? "⏰" : "⚠"} ${t(s[0])}</span><div class="bar"><i style="width:${pc}%"></i></div></div>
+ <button class="btn t w" style="margin-top:12px;min-height:64px;font-size:22px" onclick="listen()">🔊 ${t("listen")}</button>
+ ${lv ? `<button class="btn w" style="margin-top:10px;min-height:64px;font-size:22px" onclick="payForm(${cur})">💰 ${t("addPay")}</button>` : ""}
+ <div style="margin-top:14px">${ln("🤝", t("orig"), R(l.p))}${ln("📈", t("int"), R(c.i))}${ln("✅", t("repaid"), R(c.pd))}</div>
+ <h3>📅 ${t("inst")}</h3>` + (l.pay.length ? l.pay.map((x, j) => `<div class="it"><span class="tk ${x.ok === 1 ? "ok" : x.ok === -1 ? "no" : "wa"}">${x.ok === 1 ? "✔" : x.ok === -1 ? "!" : "⏳"}</span><div style="flex:1"><b style="font-size:22px">${R(x.a)}</b><div class="l">${D(x.d)} · ${x.mo === "upi" ? "📱 " + t("upi") : "💵 " + t("cash")}</div></div>${x.ok === 0 && !lv ? `<button class="rb" style="background:var(--ok)" onclick="ack(${j},1)" aria-label="${t("yes")}">👍</button><button class="rb" style="background:var(--no)" onclick="ack(${j},0)" aria-label="${t("wrong")}">👎</button>` : x.ok === 1 ? `<span class="st ok">${t("ok")}</span>` : x.ok === -1 ? `<span class="st no">${t("flag")}</span>` : ""}</div>`).join("") : `<div class="l">${t("none")}</div>`)
+        }
+        function render() {
+            $("top").innerHTML = `<div class="top"><div class="tb"><span class="logo" onclick="go(me?'home':'auth')">📒 सही हिसाब</span><i></i><select class="lsel" onchange="setLang(this.value)" aria-label="Language">${Object.keys(T).map(k => `<option value="${k}"${k === lang ? " selected" : ""}>🌐 ${LN[k]}</option>`).join("")}</select>${me ? `<button class="ex" onclick="logout()" aria-label="${t("logout")}" title="${t("logout")}">⎋</button>` : ""}</div></div>`;
+            const au = scr === "auth" || scr === "otp";
+            $("hero").innerHTML = au ? `<div class="hero"><div class="bk"><span class="cn c1">🪙</span><span class="cn c2">🪙</span><span class="cn c3">🪙</span><span class="bo">📒</span></div><h1>सही हिसाब</h1><p>${t("tag")}</p></div>` : "";
+            let h = "", nv = "";
+            if (scr === "auth") h = `<div id="box"><label>📱 ${t("phone")}</label><div class="phw"><span class="cc">+91</span><input id="fp" type="tel" inputmode="numeric" maxlength="10" value="${esc(kv)}" autocomplete="tel"></div><button class="btn w shine" style="margin-top:16px;min-height:64px;font-size:22px" onclick="sendOtp()">📩 ${t("getOtp")}</button></div><div style="margin-top:18px">${[["📒", "f1"], ["🔊", "f2"], ["🔒", "f3"]].map(([e, k]) => `<div class="fl"><span>${e}</span>${t(k)}</div>`).join("")}</div><p class="l c">${t("tryn")}</p>`;
+            else if (scr === "otp") h = `<div id="box"><div class="l">${t("sent")} +91 ${fm(ph)}</div><div class="dotp">🔔 ${t("dotp")}: <span style="font-size:26px;letter-spacing:.2em">${otp}</span></div><label>🔑 ${t("otp")}</label><div class="obs">${[0, 1, 2, 3].map(() => `<input class="ob" type="tel" inputmode="numeric" maxlength="1" oninput="ob(this)" onkeydown="bk(this,event)" autocomplete="one-time-code">`).join("")}</div><button class="btn w shine" style="min-height:64px;font-size:22px" onclick="verify()">✅ ${t("verify")}</button><button class="back" style="width:100%;margin-top:6px" onclick="scr='auth';an='L';render()">${t("chg")}</button></div>`;
+            else if (scr === "home") {
+                const g = V("gave"), k = V("took"); let a = 0, b = 0; g.forEach(i => a += calc(L[i]).left); k.forEach(i => b += calc(L[i]).left); const ls = tab === "gave" ? g : k;
+                h = `<div class="who">${t("hi")} 👋 +91 ${fm(me.ph)}</div><div class="dbl"><div><small>🤝 ${t("left")}</small><b class="amt ok" data-v="${a}">${R(a)}</b></div><div><small>🙏 ${t("toPay")}</small><b class="amt no" data-v="${b}">${R(b)}</b></div></div>` + al(ls) + (ls.length ? ls.map((i, x) => row(i, tab, x)).join("") : `<div class="empty">🌱<br>${t("nolo")}</div>`);
+                nv = `<div class="nav"><div><button class="${tab === "gave" ? "on" : ""}" onclick="tab='gave';an='T';render()"><span>🤝</span>${t("gave")} (${g.length})</button><button class="${tab === "took" ? "on" : ""}" onclick="tab='took';an='T';render()"><span>🙏</span>${t("took")} (${k.length})</button></div></div>` + (tab === "gave" ? `<button class="btn fab shine" onclick="loanForm()">➕ ${t("addLoan")}</button>` : "")
+            }
+            else h = detail();
+            const ap = $("app"); ap.className = ""; ap.innerHTML = h; $("nav").innerHTML = nv; if (an) { void ap.offsetWidth; ap.className = "in" + an; an = "" } cu()
+        }
+        document.documentElement.lang = lang; render();
+    </script>
+</body>
+
+</html>
