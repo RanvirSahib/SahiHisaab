@@ -396,3 +396,11 @@ This document maintains a continuous, detailed record of all development activit
   - Rendered `AddPaymentModal` via Edge CDP: entered ₹1,000 installment, verified real-time calculation breakdown and zero visual overflow.
 - **Strict Cleanup Compliance:** Purged `screenshot_payment_modal_upgraded.png` and `verify_payment_modal_upgrade.cjs` immediately following visual verification.
 - **Production Compilation:** Tested with `npm run build` — 1,645 modules compiled cleanly (0 errors). Live at `http://localhost:3000`.
+
+### Phase 31: GitHub Repository Setup & Initial Push
+- **Repository Link:** `https://github.com/RanvirSahib/SahiHisaab.git`
+- **Actions Completed:**
+  - Authored a comprehensive `README.md` detailing the project's vision, features, dual ledger architecture, voice assistant, Supabase setup, tech stack, and roadmap.
+  - Created a robust `.gitignore` ensuring that sensitive files (`.env`, `.env.local`), `node_modules`, build outputs (`dist/`), and temporary test scripts remain excluded from git history.
+  - Verified 0 build regressions via `npm run build`.
+  - Initialized git repository, created initial commit on `main`, and pushed cleanly to GitHub remote `origin/main`.
