@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { X, Check, UserPlus, Sparkles, Calendar, Clock } from 'lucide-react';
+import { useState } from 'react';
+import { X, Check, UserPlus, Calendar, Info } from 'lucide-react';
 import { getTranslation } from '../translations';
 import confetti from 'canvas-confetti';
 
@@ -52,7 +52,7 @@ export default function AddLoanModal({ lang, lender, onClose, onSave }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 animate-in fade-in duration-200">
+    <div className="no-print fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 animate-in fade-in duration-200">
       <div className="bg-bahipaper-ledger w-full sm:max-w-lg rounded-t-3xl sm:rounded-3xl shadow-2xl border-t-4 sm:border-2 border-bahiteal-700 max-h-[92vh] overflow-y-auto">
 
         {/* Header */}
@@ -160,9 +160,10 @@ export default function AddLoanModal({ lang, lender, onClose, onSave }) {
                 <button
                   type="button"
                   onClick={() => setStartDate(new Date().toISOString().slice(0, 10))}
-                  className="text-xs font-bold text-bahiteal-700 hover:text-bahiteal-900 bg-bahiteal-50 hover:bg-bahiteal-100 px-2 py-0.5 rounded-full border border-bahiteal-200 transition"
+                  className="text-xs font-bold text-bahiteal-700 hover:text-bahiteal-900 bg-bahiteal-50 hover:bg-bahiteal-100 px-2.5 py-0.5 rounded-full border border-bahiteal-200 transition inline-flex items-center gap-1"
                 >
-                  📅 {t('today')}
+                  <Calendar className="w-3 h-3" />
+                  <span>{t('today')}</span>
                 </button>
               </div>
               <div className="flex items-center rounded-2xl border-2 border-bahiteal-700 bg-white overflow-hidden focus-within:ring-4 focus-within:ring-bahiteal-200 shadow-sm transition">
@@ -278,8 +279,9 @@ export default function AddLoanModal({ lang, lender, onClose, onSave }) {
                     className="flex-1 min-w-0 pl-4 pr-3 py-2.5 text-base font-bold tracking-normal outline-none text-bahiteal-900 placeholder:text-gray-400 placeholder:font-normal bg-transparent"
                   />
                 </div>
-                <p className="text-xs text-gray-500 font-semibold mt-1 pl-1">
-                  💡 {lang === 'hi' ? 'दशमलव / पॉइंट्स में भी लिख सकते हैं (उदा. 1.25%, 2.75%)' : 'You can enter decimal points (e.g. 1.25%, 2.75%)'}
+                <p className="text-xs text-gray-500 font-semibold mt-1 pl-1 flex items-center gap-1">
+                  <Info className="w-3.5 h-3.5 text-bahiteal-700 shrink-0" />
+                  <span>{lang === 'hi' ? 'दशमलव / पॉइंट्स में भी लिख सकते हैं (उदा. 1.25%, 2.75%)' : 'You can enter decimal points (e.g. 1.25%, 2.75%)'}</span>
                 </p>
               </div>
             )}

@@ -113,13 +113,54 @@ body {
 
 /* Print styling for physical thermal or paper receipts */
 @media print {
-  body {
-    background: white !important;
+  @page {
+    size: auto;
+    margin: 6mm;
   }
+
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  header,
+  main,
+  nav,
   .no-print {
     display: none !important;
   }
-  .print-only {
+
+  .receipt-modal-backdrop {
+    position: static !important;
+    inset: auto !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
     display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  .receipt-printable-card {
+    position: static !important;
+    margin: 0 auto !important;
+    max-width: 480px !important;
+    width: 100% !important;
+    box-shadow: none !important;
+    border: 2px solid #0b4f4a !important;
+    border-radius: 12px !important;
+    overflow: visible !important;
+    page-break-inside: avoid !important;
+    page-break-after: avoid !important;
+    page-break-before: avoid !important;
+    break-inside: avoid !important;
+    background: #fffdf7 !important;
   }
 }

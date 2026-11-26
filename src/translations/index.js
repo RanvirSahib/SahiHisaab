@@ -14,12 +14,12 @@ export const TRANSLATIONS = {
 
     // Summary Cards
     lent: "कुल दिया",
-    recovered: "कुल वापस मिला",
-    leftToReceive: "अभी लेना बाकी",
+    recovered: "वापस मिला",
+    leftToReceive: "लेना बाकी",
     totalToPay: "बची हुई रकम",
     originalLoan: "असली उधार",
     interestAdded: "जुड़ा ब्याज",
-    totalRepaid: "अब तक चुकाया",
+    totalRepaid: "कुल चुकाया",
     repaymentProgress: "चुकता प्रगति",
 
     // Status
@@ -27,6 +27,11 @@ export const TRANSLATIONS = {
     dueSoon: "जल्दी देना है",
     overdue: "तारीख निकल गई",
     active: "सक्रिय खाता",
+    activeLoans: "सक्रिय उधार खाते",
+    previousLoans: "पिछले चुकता खाते",
+    noActiveLoans: "कोई सक्रिय उधार बकाया नहीं है!",
+    noActiveLoansSub: "आपके सभी पुराने खाते पूरे चुकता हो चुके हैं।",
+    fullyPaidCount: "चुकता",
 
     // Actions & Buttons
     addPayment: "किस्त जोड़ें",
@@ -86,10 +91,12 @@ export const TRANSLATIONS = {
     all: "सभी",
 
     // Authentic Bahi-Khata Receipt Terms
-    receiptTitle: "डिजिटल बही-खाता पावती",
-    receiptLender: "ऋणदाता / दुकान",
-    receiptBorrower: "ऋणी / ग्राहक",
-    receiptVillage: "गाँव / पता",
+    receiptTitle: "डिजिटल बही-खाता रसीद",
+    receiptNo: "रसीद सं.",
+    date: "तारीख",
+    receiptLender: "दुकानदार / ऋणदाता",
+    receiptBorrower: "ग्राहक / ऋणी",
+    receiptVillage: "गाँव",
     receiptPhone: "मोबाइल नंबर",
     receiptOriginal: "मूल उधार राशि",
     receiptInterest: "कुल जुड़ा ब्याज",
@@ -100,7 +107,17 @@ export const TRANSLATIONS = {
     // Voice readouts
     sayRemaining: "नमस्ते {name}! आपके खाते में अभी {amount} रुपये देने बाकी हैं। मूल उधार {orig} रुपये था, और अब तक आपने {repaid} रुपये चुका दिए हैं।",
     sayZero: "बधाई हो {name}! आपका सारा हिसाब चुकता हो चुका है। कोई बकाया नहीं है।",
-    sayPaymentNotice: "आखिरी भुगतान {amount} रुपये का {date} को हुआ था।"
+    sayPaymentNotice: "आखिरी भुगतान {amount} रुपये का {date} को हुआ था।",
+
+    // Trust & Guarantee Box
+    trustSealTitle: "100% सुरक्षित और प्रमाणित बही-खाता",
+    trustPillar1Title: "साफ़ हिसाब",
+    trustPillar1Sub: "बिना किसी उलझन के",
+    trustPillar2Title: "बोलकर सुनो",
+    trustPillar2Sub: "हिंदी और पंजाबी में",
+    trustPillar3Title: "पक्की पावती",
+    trustPillar3Sub: "व्हाट्सऐप रसीद के साथ",
+    trustSafetyNote: "दोनों पक्षों की सहमति से ही हिसाब पक्का होता है"
   },
 
   en: {
@@ -118,10 +135,10 @@ export const TRANSLATIONS = {
 
     // Summary Cards
     lent: "Total Lent",
-    recovered: "Total Recovered",
-    leftToReceive: "Pending to Receive",
+    recovered: "Recovered",
+    leftToReceive: "Pending",
     totalToPay: "Total Left to Pay",
-    originalLoan: "Original Principal",
+    originalLoan: "Original Loan",
     interestAdded: "Interest Added",
     totalRepaid: "Total Repaid",
     repaymentProgress: "Repayment Progress",
@@ -131,15 +148,20 @@ export const TRANSLATIONS = {
     dueSoon: "Due Soon",
     overdue: "Overdue",
     active: "Active",
+    activeLoans: "Active Loan Ledgers",
+    previousLoans: "Previous Loans",
+    noActiveLoans: "No active debts outstanding!",
+    noActiveLoansSub: "All your previous loans have been fully settled.",
+    fullyPaidCount: "Settled",
 
     // Actions & Buttons
     addPayment: "Add Payment",
     addLoan: "New Loan Record",
-    listen: "Listen (Voice)",
+    listen: "Listen",
     listening: "Speaking...",
     stopListen: "Stop",
     confirmPaid: "Yes, Paid",
-    flagDispute: "Wrong / Disputed!",
+    flagDispute: "Dispute",
     confirmed: "Confirmed",
     flagged: "Flagged for check",
     shareWhatsApp: "Share on WhatsApp",
@@ -171,7 +193,7 @@ export const TRANSLATIONS = {
 
     // Auth & OTP
     phone: "Mobile Number",
-    getOtp: "Get Demo OTP",
+    getOtp: "Get OTP",
     enterOtp: "Enter 4-digit OTP",
     demoOtp: "Demo OTP Code",
     verifyAndLogin: "Verify & Enter",
@@ -191,9 +213,11 @@ export const TRANSLATIONS = {
 
     // Authentic Bahi-Khata Receipt Terms
     receiptTitle: "Digital Bahi-Khata Receipt",
-    receiptLender: "Lender / Shop",
-    receiptBorrower: "Borrower / Client",
-    receiptVillage: "Village / Location",
+    receiptNo: "Receipt No:",
+    date: "Date",
+    receiptLender: "Lender (Creditor)",
+    receiptBorrower: "Borrower (Client)",
+    receiptVillage: "Village",
     receiptPhone: "Mobile Number",
     receiptOriginal: "Original Principal",
     receiptInterest: "Total Interest Added",
@@ -204,7 +228,17 @@ export const TRANSLATIONS = {
     // Voice readouts
     sayRemaining: "Namaste {name}! You have {amount} rupees left to pay. The original loan was {orig} rupees, and you have paid back {repaid} rupees so far.",
     sayZero: "Congratulations {name}! You have fully paid off your balance. Thank you!",
-    sayPaymentNotice: "The last payment was {amount} rupees on {date}."
+    sayPaymentNotice: "The last payment was {amount} rupees on {date}.",
+
+    // Trust & Guarantee Box
+    trustSealTitle: "100% Safe & Verified Community Ledger",
+    trustPillar1Title: "Clear Ledger",
+    trustPillar1Sub: "Zero confusing jargon",
+    trustPillar2Title: "Voice Readout",
+    trustPillar2Sub: "In Hindi & Punjabi",
+    trustPillar3Title: "Mutual Trust",
+    trustPillar3Sub: "WhatsApp proof & slips",
+    trustSafetyNote: "Accounts are protected and verified by mutual consent"
   },
 
   pa: {
@@ -222,12 +256,12 @@ export const TRANSLATIONS = {
 
     // Summary Cards
     lent: "ਕੁੱਲ ਦਿੱਤਾ",
-    recovered: "ਕੁੱਲ ਵਾਪਸ ਮਿਲਿਆ",
-    leftToReceive: "ਹਾਲੇ ਲੈਣਾ ਬਾਕੀ",
+    recovered: "ਵਾਪਸ ਮਿਲਿਆ",
+    leftToReceive: "ਲੈਣਾ ਬਾਕੀ",
     totalToPay: "ਬਾਕੀ ਰਕਮ",
     originalLoan: "ਅਸਲ ਉਧਾਰ",
     interestAdded: "ਜੁੜਿਆ ਵਿਆਜ",
-    totalRepaid: "ਹੁਣ ਤੱਕ ਮੋੜਿਆ",
+    totalRepaid: "ਕੁੱਲ ਮੋੜਿਆ",
     repaymentProgress: "ਮੋੜਨ ਦੀ ਪ੍ਰਗਤੀ",
 
     // Status
@@ -235,6 +269,11 @@ export const TRANSLATIONS = {
     dueSoon: "ਜਲਦੀ ਦੇਣਾ ਹੈ",
     overdue: "ਦੇਰ ਹੋ ਗਈ",
     active: "ਚਾਲੂ ਖਾਤਾ",
+    activeLoans: "ਸਰਗਰਮ ਉਧਾਰ ਖਾਤੇ",
+    previousLoans: "ਪਿਛਲੇ ਚੁਕਤਾ ਖਾਤੇ",
+    noActiveLoans: "ਕੋਈ ਸਰਗਰਮ ਉਧਾਰ ਬਾਕੀ ਨਹੀਂ ਹੈ!",
+    noActiveLoansSub: "ਤੁਹਾਡੇ ਸਾਰੇ ਪੁਰਾਣੇ ਖਾਤੇ ਪੂਰੇ ਚੁਕਤਾ ਹੋ ਚੁੱਕੇ ਹਨ।",
+    fullyPaidCount: "ਚੁਕਤਾ",
 
     // Actions & Buttons
     addPayment: "ਕਿਸ਼ਤ ਜੋੜੋ",
@@ -295,9 +334,11 @@ export const TRANSLATIONS = {
 
     // Authentic Bahi-Khata Receipt Terms
     receiptTitle: "ਡਿਜੀਟਲ ਬਹੀ-ਖਾਤਾ ਰਸੀਦ",
-    receiptLender: "ਉਧਾਰ ਦੇਣ ਵਾਲਾ / ਦੁਕਾਨ",
-    receiptBorrower: "ਉਧਾਰ ਲੈਣ ਵਾਲਾ / ਗਾਹਕ",
-    receiptVillage: "ਪਿੰਡ / ਪਤਾ",
+    receiptNo: "ਰਸੀਦ ਨੰ.",
+    date: "ਮਿਤੀ",
+    receiptLender: "ਉਧਾਰ ਦੇਣ ਵਾਲਾ (ਦੁਕਾਨ)",
+    receiptBorrower: "ਉਧਾਰ ਲੈਣ ਵਾਲਾ (ਗਾਹਕ)",
+    receiptVillage: "ਪਿੰਡ",
     receiptPhone: "ਮੋਬਾਈਲ ਨੰਬਰ",
     receiptOriginal: "ਅਸਲ ਉਧਾਰ ਰਕਮ",
     receiptInterest: "ਕੁੱਲ ਜੁੜਿਆ ਵਿਆਜ",
@@ -308,7 +349,17 @@ export const TRANSLATIONS = {
     // Voice readouts
     sayRemaining: "ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ {name}! ਤੁਹਾਡੇ ਵੱਲ ਹਾਲੇ {amount} ਰੁਪਏ ਬਾਕੀ ਹਨ। ਅਸਲ ਉਧਾਰ {orig} ਰੁਪਏ ਸੀ, ਅਤੇ ਹੁਣ ਤੱਕ ਤੁਸੀਂ {repaid} ਰੁਪਏ ਮੋੜ ਦਿੱਤੇ ਹਨ।",
     sayZero: "ਵਧਾਈਆਂ {name}! ਤੁਹਾਡਾ ਸਾਰਾ ਹਿਸਾਬ ਪੂਰਾ ਚੁਕਤਾ ਹੋ ਗਿਆ ਹੈ। ਧੰਨਵਾਦ!",
-    sayPaymentNotice: "ਆਖਰੀ ਕਿਸ਼ਤ {amount} ਰੁਪਏ ਦੀ {date} ਨੂੰ ਦਿੱਤੀ ਗਈ ਸੀ।"
+    sayPaymentNotice: "ਆਖਰੀ ਕਿਸ਼ਤ {amount} ਰੁਪਏ ਦੀ {date} ਨੂੰ ਦਿੱਤੀ ਗਈ ਸੀ।",
+
+    // Trust & Guarantee Box
+    trustSealTitle: "100% ਸੁਰੱਖਿਅਤ ਤੇ ਪ੍ਰਮਾਣਿਤ ਬਹੀ-ਖਾਤਾ",
+    trustPillar1Title: "ਸਾਫ਼ ਹਿਸਾਬ",
+    trustPillar1Sub: "ਬਿਨਾਂ ਕਿਸੇ ਉਲਝਣ ਦੇ",
+    trustPillar2Title: "ਬੋਲ ਕੇ ਸੁਣੋ",
+    trustPillar2Sub: "ਪੰਜਾਬੀ ਅਤੇ ਹਿੰਦੀ ਵਿੱਚ",
+    trustPillar3Title: "ਪੱਕੀ ਰਸੀਦ",
+    trustPillar3Sub: "ਵਟਸਐਪ ਸਬੂਤ ਦੇ ਨਾਲ",
+    trustSafetyNote: "ਦੋਵਾਂ ਧਿਰਾਂ ਦੀ ਸਹਿਮਤੀ ਨਾਲ ਹੀ ਹਿਸਾਬ ਪੱਕਾ ਹੁੰਦਾ ਹੈ"
   }
 };
 

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Globe, Check, ChevronDown } from 'lucide-react';
 import { LANGUAGES } from '../translations';
 
@@ -13,7 +13,11 @@ export default function LanguageSelector({ currentLang, onSelectLang }) {
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
   }, []);
 
   useEffect(() => {
@@ -47,7 +51,7 @@ export default function LanguageSelector({ currentLang, onSelectLang }) {
 
       {/* Sleek, Minimal, High-End Dropdown Menu */}
       {isOpen && (
-        <div className="absolute right-0 top-full mt-2 w-48 rounded-2xl bg-white shadow-xl shadow-black/10 border border-slate-100 p-1.5 z-50 animate-in fade-in zoom-in-95 duration-150">
+        <div className="absolute right-0 top-full mt-2 w-48 rounded-2xl bg-white shadow-xl shadow-black/10 border border-slate-100 p-1.5 z-50 transition ease-out duration-150">
           <div className="space-y-1">
             {LANGUAGES.map((l) => {
               const isSelected = l.code === currentLang;
@@ -57,7 +61,7 @@ export default function LanguageSelector({ currentLang, onSelectLang }) {
                   key={l.code}
                   type="button"
                   onClick={() => {
-                    onSelectLang(l.code);
+                    if (onSelectLang) onSelectLang(l.code);
                     setIsOpen(false);
                   }}
                   className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-sm transition text-left ${

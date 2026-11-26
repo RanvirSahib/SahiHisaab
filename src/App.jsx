@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowUpRight, ArrowDownLeft } from 'lucide-react';
 import Header from './components/Header';
 import AuthScreen from './components/AuthScreen';
@@ -165,9 +165,13 @@ export default function App() {
     showToast(confirmedStatus === 1 ? `✅ ${t('confirmed')}` : `⚠️ ${t('flagged')}`);
   };
 
-  // Filter counts for tabs
-  const gaveDebts = currentUser ? debts.filter(d => d.lenderPhone === currentUser.phone) : [];
-  const tookDebts = currentUser ? debts.filter(d => d.borrowerPhone === currentUser.phone) : [];
+  // Filter active debt counts for tabs (so fully paid / settled loans don't inflate active debt counts)
+  const activeGaveDebts = currentUser 
+    ? debts.filter(d => d.lenderPhone === currentUser.phone && calculateLoanMetrics(d).remaining > 0) 
+    : [];
+  const activeTookDebts = currentUser 
+    ? debts.filter(d => d.borrowerPhone === currentUser.phone && calculateLoanMetrics(d).remaining > 0) 
+    : [];
 
   return (
     <div className="min-h-screen flex flex-col font-baloo selection:bg-bahigold-300">
@@ -214,7 +218,7 @@ export default function App() {
                     ? 'bg-white text-bahiteal-900 shadow-xs'
                     : 'bg-gray-100 text-gray-500 border border-gray-200/60'
                 }`}>
-                  {gaveDebts.length}
+                  {activeGaveDebts.length}
                 </span>
               </button>
 
@@ -236,7 +240,7 @@ export default function App() {
                     ? 'bg-white text-bahiteal-900 shadow-xs'
                     : 'bg-gray-100 text-gray-500 border border-gray-200/60'
                 }`}>
-                  {tookDebts.length}
+                  {activeTookDebts.length}
                 </span>
               </button>
             </div>

@@ -1,5 +1,9 @@
-import React, { useState } from 'react';
-import { Phone, ArrowRight, ShieldCheck, Volume2, Sparkles, CheckCircle2, AlertCircle, Database, Check } from 'lucide-react';
+import { useState } from 'react';
+import {
+  Phone, ArrowRight, CheckCircle2, AlertCircle,
+  BookOpen, Volume2, ShieldCheck, Store, User,
+  Smartphone, Bell
+} from 'lucide-react';
 import { getTranslation } from '../translations';
 import { sendSupabaseOtp, verifySupabaseOtp, isSupabaseConfigured } from '../utils/supabase';
 import confetti from 'canvas-confetti';
@@ -133,10 +137,10 @@ export default function AuthScreen({ lang, onLogin }) {
     <div className="max-w-md mx-auto pt-2 pb-10 px-1 sm:px-4">
       {/* Official Stacked Brand Logo (Without Background) */}
       <div className="text-center py-4 sm:py-5 px-3 sm:px-4 rounded-3xl bg-bahiteal-700 text-white shadow-bahi relative overflow-hidden mb-5 flex items-center justify-center">
-        <img 
-          src="/logo/stackedlogo_withoutbackground.png" 
-          alt="SahiHisaab - सही हिसाब" 
-          className="w-auto h-28 sm:h-36 max-w-[280px] sm:max-w-[320px] object-contain drop-shadow-md" 
+        <img
+          src="/logo/stackedlogo_withoutbackground.png"
+          alt="SahiHisaab - सही हिसाब"
+          className="w-auto h-28 sm:h-36 max-w-[280px] sm:max-w-[320px] object-contain drop-shadow-md"
         />
       </div>
 
@@ -196,14 +200,16 @@ export default function AuthScreen({ lang, onLogin }) {
             {/* Supabase SMS or Demo OTP Banner */}
             {supabaseActive ? (
               <div className="bg-bahiteal-50 border border-bahiteal-200 rounded-2xl p-2.5 sm:p-3 text-center mb-4">
-                <div className="text-xs font-bold text-bahiteal-800">
-                  📲 {lang === 'hi' ? 'आपके फोन पर एसएमएस द्वारा ओटीपी भेजा गया है' : 'Real SMS OTP sent to your phone'}
+                <div className="text-xs font-bold text-bahiteal-800 flex items-center justify-center gap-1.5">
+                  <Smartphone className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>{lang === 'hi' ? 'आपके फोन पर एसएमएस द्वारा ओटीपी भेजा गया है' : 'Real SMS OTP sent to your phone'}</span>
                 </div>
               </div>
             ) : (
               <div className="bg-bahigold-300/40 border border-bahigold-500 rounded-2xl p-2.5 sm:p-3 text-center mb-4">
-                <div className="text-[11px] sm:text-xs font-bold text-gray-700 uppercase tracking-wide">
-                  🔔 {t('demoOtp')}
+                <div className="text-[11px] sm:text-xs font-bold text-gray-700 uppercase tracking-wide flex items-center justify-center gap-1.5">
+                  <Bell className="w-3.5 h-3.5 text-amber-700 shrink-0" />
+                  <span>{t('demoOtp')}</span>
                 </div>
                 <div className="text-2xl sm:text-3xl font-extrabold text-bahiteal-900 tracking-widest mt-0.5">
                   {generatedOtp}
@@ -261,15 +267,15 @@ export default function AuthScreen({ lang, onLogin }) {
         {/* Quick Demo Login Chips */}
         <div className="mt-8 pt-6 border-t-2 border-dashed border-bahipaper-line">
           <p className="text-xs font-extrabold text-gray-500 uppercase tracking-wider mb-3 text-center">
-            ⚡ {t('demoProfiles')}
+            {t('demoProfiles')}
           </p>
           <div className="flex flex-col sm:flex-row gap-2.5">
             <button
               onClick={() => handleQuickDemo('9876543210', 'Harpreet General Store')}
               className="flex-1 py-3 px-3 rounded-2xl bg-bahiteal-50 hover:bg-bahiteal-100 border-2 border-bahiteal-500/30 text-left transition flex items-center gap-2.5 active:scale-98"
             >
-              <div className="w-10 h-10 rounded-full bg-bahiteal-700 text-white flex items-center justify-center font-bold text-lg flex-shrink-0">
-                🏪
+              <div className="w-10 h-10 rounded-full bg-bahiteal-700 text-white flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-xs">
+                <Store className="w-5 h-5 text-bahigold-300 stroke-[2.2]" />
               </div>
               <div className="overflow-hidden">
                 <div className="text-xs text-bahiteal-700 font-bold">1-Click Login</div>
@@ -283,8 +289,8 @@ export default function AuthScreen({ lang, onLogin }) {
               onClick={() => handleQuickDemo('9123456780', 'Ramesh Kumar')}
               className="flex-1 py-3 px-3 rounded-2xl bg-bahigold-50 hover:bg-bahigold-100 border-2 border-bahigold-500/40 text-left transition flex items-center gap-2.5 active:scale-98"
             >
-              <div className="w-10 h-10 rounded-full bg-bahigold-500 text-bahiteal-900 flex items-center justify-center font-bold text-lg flex-shrink-0">
-                👨‍🌾
+              <div className="w-10 h-10 rounded-full bg-bahigold-400 text-bahiteal-900 flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-xs">
+                <User className="w-5 h-5 text-bahiteal-900 stroke-[2.5]" />
               </div>
               <div className="overflow-hidden">
                 <div className="text-xs text-bahigold-800 font-bold">1-Click Login</div>
@@ -297,25 +303,37 @@ export default function AuthScreen({ lang, onLogin }) {
         </div>
       </div>
 
-      {/* Trust Highlights */}
-      <div className="mt-6 space-y-3">
-        <div className="flex items-center gap-3 bg-white/70 backdrop-blur rounded-2xl p-3 border border-bahipaper-line">
-          <span className="text-2xl">📒</span>
-          <span className="font-bold text-sm text-gray-700">
-            {lang === 'hi' ? 'साफ़ और पारदर्शी बही-खाता' : 'Zero jargon, crystal-clear accounting'}
-          </span>
+      {/* Simple, Attractive & Human Bahi-Khata Trust Bar */}
+      <div className="mt-6 text-center">
+        {/* Subtle Brand Motto */}
+        <div className="text-[11px] font-extrabold uppercase tracking-widest text-bahiteal-800/80 mb-2.5 flex items-center justify-center gap-2">
+          <span className="w-5 h-[1.5px] bg-bahiteal-300/80 rounded-full"></span>
+          <span>✦ {t('tagline')} ✦</span>
+          <span className="w-5 h-[1.5px] bg-bahiteal-300/80 rounded-full"></span>
         </div>
-        <div className="flex items-center gap-3 bg-white/70 backdrop-blur rounded-2xl p-3 border border-bahipaper-line">
-          <span className="text-2xl">🔊</span>
-          <span className="font-bold text-sm text-gray-700">
-            {lang === 'hi' ? 'अपनी भाषा में बोलकर सुनाने की सुविधा' : 'Voice assistant reads out balances in Hindi & Punjabi'}
-          </span>
+
+        {/* 3 Clean Floating Badges - Exactly 1 Row on Mobile (No awkward 2+1 wrap) */}
+        <div className="w-full max-w-sm mx-auto p-1 bg-white/95 backdrop-blur-xs rounded-2xl border border-bahiteal-200/80 shadow-xs mb-3">
+          <div className="grid grid-cols-3 gap-1">
+            <span className="flex items-center justify-center gap-1 sm:gap-1.5 px-1 sm:px-2.5 py-1.5 rounded-xl bg-bahiteal-50/90 text-bahiteal-900 font-extrabold text-[11px] sm:text-xs">
+              <BookOpen className="w-3.5 h-3.5 text-bahiteal-700 stroke-[2.2] shrink-0" />
+              <span className="truncate">{t('trustPillar1Title')}</span>
+            </span>
+            <span className="flex items-center justify-center gap-1 sm:gap-1.5 px-1 sm:px-2.5 py-1.5 rounded-xl bg-amber-50/90 text-bahiteal-900 font-extrabold text-[11px] sm:text-xs">
+              <Volume2 className="w-3.5 h-3.5 text-amber-700 stroke-[2.2] shrink-0" />
+              <span className="truncate">{t('trustPillar2Title')}</span>
+            </span>
+            <span className="flex items-center justify-center gap-1 sm:gap-1.5 px-1 sm:px-2.5 py-1.5 rounded-xl bg-emerald-50/90 text-bahiteal-900 font-extrabold text-[11px] sm:text-xs">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700 stroke-[2.2] shrink-0" />
+              <span className="truncate">{t('trustPillar3Title')}</span>
+            </span>
+          </div>
         </div>
-        <div className="flex items-center gap-3 bg-white/70 backdrop-blur rounded-2xl p-3 border border-bahipaper-line">
-          <span className="text-2xl">🔒</span>
-          <span className="font-bold text-sm text-gray-700">
-            {lang === 'hi' ? 'व्हाट्सऐप रसीद और पक्का प्रमाण' : 'Shared WhatsApp receipts & mutual payment confirmation'}
-          </span>
+
+        {/* Reassuring Mutual Consent Line */}
+        <div className="text-[11px] sm:text-xs text-gray-600 font-bold flex items-center justify-center gap-1.5">
+          <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+          <span>{t('trustSafetyNote')}</span>
         </div>
       </div>
     </div>

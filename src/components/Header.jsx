@@ -1,15 +1,12 @@
-import React from 'react';
-import { BookOpen, LogOut, Volume2, UserCheck, ShieldCheck } from 'lucide-react';
+import { LogOut, Volume2 } from 'lucide-react';
 import LanguageSelector from './LanguageSelector';
 import { getTranslation } from '../translations';
-import { formatPhone } from '../utils/storage';
 
 export default function Header({
   lang,
   setLang,
   currentUser,
   onLogout,
-  onSwitchUser,
   isSpeaking,
   onStopSpeech
 }) {
@@ -19,12 +16,12 @@ export default function Header({
     <header className="sticky top-0 z-30 bg-bahiteal-700 text-white scallop-border shadow-md">
       <div className="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between gap-2">
 
-        {/* Official Brand Logo from logo/horizontalwebsiteheader.webp */}
+        {/* Official Brand Logo without background */}
         <div className="flex items-center cursor-pointer select-none">
           <img 
-            src="/logo/horizontalwebsiteheader.webp" 
+            src="/logo/horizontalwebsiteheader_Without_Background.png" 
             alt="SahiHisaab - सही हिसाब" 
-            className="h-9 sm:h-11 w-auto max-w-[155px] sm:max-w-[210px] object-contain drop-shadow-sm" 
+            className="h-8 sm:h-10 w-auto max-w-[150px] sm:max-w-[200px] object-contain drop-shadow-sm" 
           />
         </div>
 

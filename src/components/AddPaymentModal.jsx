@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { X, Check, HandCoins, Banknote, QrCode, Calendar, Coins, ShieldCheck } from 'lucide-react';
 import { getTranslation } from '../translations';
 import { calculateLoanMetrics, formatRupee } from '../utils/storage';
@@ -39,7 +39,7 @@ export default function AddPaymentModal({ lang, loan, onClose, onSave }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 animate-in fade-in duration-200">
+    <div className="no-print fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 animate-in fade-in duration-200">
       <div className="bg-bahipaper-ledger w-full sm:max-w-lg rounded-t-3xl sm:rounded-3xl shadow-2xl border-t-4 sm:border-2 border-bahiteal-700 max-h-[92vh] overflow-y-auto">
         
         {/* Header */}
@@ -138,9 +138,10 @@ export default function AddPaymentModal({ lang, loan, onClose, onSave }) {
               <button
                 type="button"
                 onClick={() => setPaymentDate(new Date().toISOString().slice(0, 10))}
-                className="text-xs font-bold text-bahiteal-700 hover:text-bahiteal-900 bg-bahiteal-50 hover:bg-bahiteal-100 px-2 py-0.5 rounded-full border border-bahiteal-200 transition"
+                className="text-xs font-bold text-bahiteal-700 hover:text-bahiteal-900 bg-bahiteal-50 hover:bg-bahiteal-100 px-2.5 py-0.5 rounded-full border border-bahiteal-200 transition inline-flex items-center gap-1"
               >
-                📅 {t('today')}
+                <Calendar className="w-3 h-3" />
+                <span>{t('today')}</span>
               </button>
             </div>
             <div className="flex items-center rounded-2xl border-2 border-bahiteal-700 bg-white overflow-hidden focus-within:ring-4 focus-within:ring-bahiteal-200 shadow-sm transition">
