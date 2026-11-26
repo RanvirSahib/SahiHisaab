@@ -247,20 +247,20 @@ export default function LoanDetailModal({
 
           {/* Payment Installments Timeline */}
           <div>
-            <div className="flex items-center justify-between mb-2.5">
-              <h3 className="font-extrabold text-xl text-bahiteal-900 flex items-center gap-2">
-                <History className="w-5 h-5 text-bahiteal-700 shrink-0" />
-                <span>{lang === 'hi' ? 'अब तक की किस्तें' : 'Payments Timeline'}</span>
-                <span className="text-sm font-bold bg-bahiteal-100 text-bahiteal-800 px-2 py-0.5 rounded-full">
+            <div className="flex items-center justify-between mb-2.5 gap-2">
+              <h3 className="font-extrabold text-base sm:text-xl text-bahiteal-900 flex items-center gap-1.5 sm:gap-2 min-w-0">
+                <History className="w-4 h-4 sm:w-5 sm:h-5 text-bahiteal-700 shrink-0" />
+                <span className="truncate">{lang === 'hi' ? 'अब तक की किस्तें' : 'Payments Timeline'}</span>
+                <span className="text-xs sm:text-sm font-bold bg-bahiteal-100 text-bahiteal-800 px-2 py-0.5 rounded-full shrink-0">
                   {loan.payments ? loan.payments.length : 0}
                 </span>
               </h3>
 
               <button
                 onClick={() => onOpenReceipt(loan, null)}
-                className="text-xs font-extrabold text-bahiteal-700 hover:underline flex items-center gap-1"
+                className="px-2.5 py-1 rounded-xl bg-bahiteal-50 hover:bg-bahiteal-100 border border-bahiteal-200/80 text-[11px] sm:text-xs font-extrabold text-bahiteal-800 flex items-center gap-1.5 shrink-0 whitespace-nowrap shadow-2xs transition active:scale-98"
               >
-                <ReceiptIndianRupee className="w-3.5 h-3.5" />
+                <ReceiptIndianRupee className="w-3.5 h-3.5 stroke-[2.2] text-bahiteal-700" />
                 <span>{t('printReceipt')}</span>
               </button>
             </div>

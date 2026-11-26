@@ -918,4 +918,18 @@ This document maintains a continuous, detailed record of all development activit
   - Executed `npm run build` — 1,646 modules transformed cleanly, 0 errors.
   - Live on `http://localhost:3000`.
 - **Git Commitments:**
-  - Workspace changes ready locally.
+  - Committed and pushed to GitHub `main` branch (commit `5bb2037`).
+
+### Phase 61: Mobile Viewport Alignment for Payment Timeline Receipt Action
+- **User Feedback Addressed:**
+  - User requested: *"ajust this here in the mobile view '"* with screenshot showing the payment installments timeline header where the payments count pill `[2]` and the `"View Receipt"` action button collided and forced `"View \n Receipt"` to break onto two lines against the right edge.
+- **Layout & Typography Fixes (`src/components/LoanDetailModal.jsx`):**
+  - Sized the timeline header responsively: `text-base sm:text-xl font-extrabold flex items-center gap-1.5 sm:gap-2 min-w-0`.
+  - Added `shrink-0` on the count pill and history icon, with `truncate` on the title label.
+  - Styled the receipt action button as a dedicated compact pill: `px-2.5 py-1 rounded-xl bg-bahiteal-50 hover:bg-bahiteal-100 border border-bahiteal-200/80 text-[11px] sm:text-xs font-extrabold text-bahiteal-800 shrink-0 whitespace-nowrap shadow-2xs`.
+  - Added `whitespace-nowrap` to prevent `"View Receipt"` from ever breaking into two lines or colliding with the count pill on narrow mobile viewports.
+- **Production Build & Verification:**
+  - Executed `npm run build` — 1,646 modules transformed cleanly, 0 errors.
+  - Live on `http://localhost:3000`.
+- **Git Commitments:**
+  - Committed and pushed to GitHub `main` branch.
