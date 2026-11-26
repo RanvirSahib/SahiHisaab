@@ -898,3 +898,24 @@ This document maintains a continuous, detailed record of all development activit
   - Live on `http://localhost:3000`.
 - **Git Commitments:**
   - Preserved strict user constraint: workspace changes kept locally, **no push to git**.
+
+### Phase 60: Direct WhatsApp Photo / Image Sharing (`navigator.share` with Files)
+- **User Feedback Addressed:**
+  - User requested: *"share this as photo not a whatsapp text"*.
+  - Previously, clicking "Share on WhatsApp" opened a WhatsApp URL with a text message summary of the receipt. The user wanted the receipt shared directly as an image/photo attachment.
+- **Implementation Details (`src/components/ReceiptModal.jsx`):**
+  - **High-Resolution Photo Capture:**
+    - Uses `html2canvas` to rasterize the authentic Bahi-Khata voucher (ruled paper, red margin line, golden scallop trim, and clear accounting breakdown) into an HD PNG `Blob` and `File`.
+  - **Native Image Sharing via Web Share API:**
+    - Evaluates `navigator.canShare({ files: [file] })`.
+    - On mobile browsers (Android Chrome, iOS Safari, etc.), calls `navigator.share({ files: [file] })`, directly launching the native share dialog with WhatsApp to send the receipt as an image/photo attachment.
+  - **Seamless Desktop Fallback:**
+    - For desktop browsers that lack file-sharing support in the Web Share API, automatically downloads `SahiHisaab_<ReceiptNumber>.png` directly to the user's downloads folder and opens WhatsApp Web with an accompanying receipt caption so the user can easily attach the photo.
+  - **Button State & Feedback:**
+    - Added loading state with a spinner (`फोटो बन रही है... / Preparing Photo...`) while the canvas captures.
+    - Updated button label to `"व्हाट्सऐप फोटो भेजें"` / `"Share Photo"`.
+- **Production Build & Verification:**
+  - Executed `npm run build` — 1,646 modules transformed cleanly, 0 errors.
+  - Live on `http://localhost:3000`.
+- **Git Commitments:**
+  - Workspace changes ready locally.

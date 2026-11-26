@@ -9,6 +9,7 @@ export default function ReceiptModal({ lang, loan, payment, onClose }) {
   const metrics = calculateLoanMetrics(loan);
   const voucherRef = useRef(null);
   const [isDownloading, setIsDownloading] = useState(false);
+  const [isSharing, setIsSharing] = useState(false);
 
   // Clean, authentic receipt serial number without cryptic programmer codes
   const rawNum = loan.id.replace(/[^0-9]/g, '');
@@ -62,37 +63,64 @@ export default function ReceiptModal({ lang, loan, payment, onClose }) {
     }
   };
 
-  const handleShareWhatsApp = () => {
-    const isPaymentReceipt = Boolean(payment);
-    const text = encodeURIComponent(
-      `📒 *सही हिसाब (SahiHisaab) ${isPaymentReceipt ? 'किस्त भुगतान पावती' : 'कुल खाता बही रसीद'}*\n` +
-      `रसीद संख्या: ${receiptNumber}\n` +
-      `तारीख: ${currentDate}\n` +
-      `-------------------------\n` +
-      `दुकान / ऋणदाता: ${loan.lenderName}\n` +
-      `ग्राहक / ऋणी: ${loan.borrowerName} (${loan.borrowerVillage})\n` +
-      `मोबाइल: +91 ${formatPhone(loan.borrowerPhone)}\n` +
-      `-------------------------\n` +
-      (isPaymentReceipt
-        ? `*किस्त भुगतान विवरण (Payment Details):*\n` +
-          `जमा की गई राशि: *${formatRupee(payment.amount)}* (${payment.mode.toUpperCase()})\n` +
-          `• ब्याज में जमा: ${thisInterestPaid > 0 ? formatRupee(thisInterestPaid) : '₹0'}\n` +
-          `• मूलधन में जमा: ${formatRupee(thisPrincipalPaid)}\n` +
-          `• ब्याज स्थिति: ${interestPendingAfterThis <= 0 ? '✔ ब्याज पूरा चुकता' : `${formatRupee(interestPendingAfterThis)} ब्याज बाकी`}\n` +
-          `-------------------------\n` +
-          `*इस किश्त के बाद शेष बकाया: ${formatRupee(balanceAfterThis)}*\n` +
-          `स्थिति: ${balanceAfterThis <= 0 ? '✔ खाता चुकता' : '⏳ सक्रिय बकाया'}\n`
-        : `*कुल खाता विवरण (Complete Account Summary):*\n` +
-          `मूल उधार राशि: ${formatRupee(loan.principal)}\n` +
-          `कुल जुड़ा ब्याज: + ${formatRupee(metrics.totalInterest)}\n` +
-          `अब तक कुल चुकाया: - ${formatRupee(metrics.totalRepaid)}\n` +
-          `कुल बकाया बाकी: *${formatRupee(metrics.remaining)}*\n` +
-          `स्थिति: ${metrics.remaining <= 0 ? '✔ पूरा चुकता (Fully Settled)' : '⏳ सक्रिय बकाया (Active)'}\n`
-      ) +
-      `-------------------------\n` +
-      `"न गलती, न झंझट, पूरा विश्वास"`
-    );
-    window.open(`https://wa.me/?text=${text}`, '_blank');
+  const handleShareWhatsApp = async () => {
+    if (!voucherRef.current || isSharing) return;
+    setIsSharing(true);
+
+    try {
+      // 1. Generate high-resolution photo of the voucher
+      const canvas = await html2canvas(voucherRef.current, {
+        scale: 2.5,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: '#f7fbff',
+        logging: false
+      });
+
+      // 2. Convert canvas to Blob and File
+      const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
+      if (!blob) throw new Error('Failed to generate image blob');
+
+      const fileName = `SahiHisaab_${receiptNumber}.png`;
+      const file = new File([blob], fileName, { type: 'image/png' });
+
+      // 3. Directly share image photo via Web Share API if supported (native on mobile devices)
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          files: [file],
+          title: `SahiHisaab Receipt ${receiptNumber}`,
+          text: `SahiHisaab (सही हिसाब) रसीद: ${receiptNumber}`
+        });
+      } else {
+        // Fallback for desktop / browsers lacking file-sharing support:
+        // Automatically download the photo so user has it instantly ready to send
+        const imgUrl = URL.createObjectURL(blob);
+        const downloadLink = document.createElement('a');
+        downloadLink.href = imgUrl;
+        downloadLink.download = fileName;
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+        URL.revokeObjectURL(imgUrl);
+
+        // Open WhatsApp Web with contextual caption
+        const isPaymentReceipt = Boolean(payment);
+        const caption = encodeURIComponent(
+          `📒 *सही हिसाब (SahiHisaab) ${isPaymentReceipt ? 'किस्त भुगतान पावती' : 'कुल खाता बही रसीद'}*\n` +
+          `रसीद संख्या: ${receiptNumber} | तारीख: ${currentDate}\n` +
+          `दुकान: ${loan.lenderName} | ग्राहक: ${loan.borrowerName}\n` +
+          `रसीद की फोटो डाउनलोड हो गई है, कृपया संलग्न करें।\n` +
+          `"न गलती, न झंझट, पूरा विश्वास"`
+        );
+        window.open(`https://wa.me/?text=${caption}`, '_blank');
+      }
+    } catch (err) {
+      if (err.name !== 'AbortError') {
+        console.error('Failed to share receipt image:', err);
+      }
+    } finally {
+      setIsSharing(false);
+    }
   };
 
   return (
@@ -484,10 +512,20 @@ export default function ReceiptModal({ lang, loan, payment, onClose }) {
         <div className="p-3.5 bg-gray-50 flex gap-2 no-print">
           <button
             onClick={handleShareWhatsApp}
-            className="flex-1 py-3 px-3 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm flex items-center justify-center gap-1.5 shadow transition active:scale-98"
+            disabled={isSharing || isDownloading}
+            className="flex-1 py-3 px-3 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm flex items-center justify-center gap-1.5 shadow transition active:scale-98 disabled:opacity-75"
           >
-            <Share2 className="w-4 h-4" />
-            <span>{t('shareWhatsApp')}</span>
+            {isSharing ? (
+              <>
+                <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin shrink-0"></span>
+                <span>{lang === 'hi' ? 'फोटो बन रही है...' : (lang === 'pa' ? 'ਫੋਟੋ ਬਣ ਰਹੀ ਹੈ...' : 'Preparing Photo...')}</span>
+              </>
+            ) : (
+              <>
+                <Share2 className="w-4 h-4 stroke-[2.2]" />
+                <span>{lang === 'hi' ? 'व्हाट्सऐप फोटो भेजें' : (lang === 'pa' ? 'ਵਟਸਐਪ ਫੋਟੋ ਭੇਜੋ' : 'Share Photo')}</span>
+              </>
+            )}
           </button>
 
           <button
